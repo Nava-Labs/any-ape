@@ -8,7 +8,12 @@ export function Header() {
           <span className="text-xl">AnyApe</span>{" "}
           {/* TODO: CHANGE INTO LOGO LATER */}
         </Link>
-        <span className="text-base ml-4">Marketplace</span>
+        <Link href="/">
+          <span className="text-base ml-4">Register</span>
+        </Link>
+        <Link href="/marketplace">
+          <span className="text-base ml-4">Marketplace</span>
+        </Link>
       </div>
       <button>0xeD7B...6Afd</button>
     </div>
