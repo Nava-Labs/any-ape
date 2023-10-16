@@ -7,13 +7,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/Table";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import {
   ArrowsUpDownIcon,
   ChevronDownIcon,
   TagIcon,
 } from "@heroicons/react/24/outline";
+import { BuyButton } from "@/components/BuyButton";
 
 type Params = {
   params: {
@@ -54,13 +55,8 @@ export default function NftDetails({ params }: Params) {
 
           <div className="px-2 pb-3">
             <div className="flex items-center rounded-xl bg-blue-500 py-2">
-              <div className="w-full text-center ">
-                <button className="text-center flex-1 w-full">
-                  <span>Buy</span>
-                </button>
-              </div>
-
-              <DropdownMenu.Root>
+              <BuyButton />
+              {/* <DropdownMenu.Root>
                 <DropdownMenu.Trigger className="flex space-x-2 items-center pl-5 pr-2 bg-blue-500 border-l-2">
                   <img
                     className="h-7 items-center"
@@ -86,7 +82,7 @@ export default function NftDetails({ params }: Params) {
                     <span>Pay from Avalanche</span>
                   </DropdownMenu.Item>
                 </DropdownMenu.Content>
-              </DropdownMenu.Root>
+              </DropdownMenu.Root> */}
             </div>
           </div>
         </div>
