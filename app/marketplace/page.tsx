@@ -50,12 +50,12 @@ export default async function Home() {
   return (
     <>
       {nfts?.map((item: any) => (
-        <Link key={item.id} href={`./marketplace/${item.id.slice(-1)}`}>
+        <Link key={item.id} href={`./marketplace/${item.id}`}>
           <div className="flex flex-col border border-neutral-500 rounded-xl">
             <Image uri={item.uri} />
             <div className="px-2 py-5 space-y-3">
               <span className="">
-                {item.collectionName} # {item.id.slice(-1)}
+                {item.collectionName} # {item.id.split("-")[1]}
               </span>
               <div className="flex justify-between">
                 <div className="flex items-center space-x-1 ">
