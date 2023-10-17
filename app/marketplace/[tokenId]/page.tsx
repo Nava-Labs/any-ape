@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Table,
   TableBody,
@@ -15,6 +13,14 @@ import {
   TagIcon,
 } from "@heroicons/react/24/outline";
 import { BuyButton } from "@/components/BuyButton";
+import { Client, cacheExchange, fetchExchange } from "@urql/core";
+import { getNftDetailsQuery } from "@/lib/gql/queries/nft";
+import truncateEthAddress from "truncate-eth-address";
+
+export const client = new Client({
+  url: "https://api.thegraph.com/subgraphs/name/jonassunandar/any-ape-subgraph",
+  exchanges: [cacheExchange, fetchExchange],
+});
 
 type Params = {
   params: {
@@ -22,13 +28,26 @@ type Params = {
   };
 };
 
-export default function NftDetails({ params }: Params) {
+export default async function NftDetails({ params }: Params) {
+  const nftDetailsRes = await client
+    .query(getNftDetailsQuery, {
+      id: "0x0cfb5d82be2b949e8fa73a656df91821e2ad99fd-1",
+    })
+    .toPromise();
+  if (!nftDetailsRes) throw new Error("Failed to fetch NFT details");
+
+  console.log(nftDetailsRes.data);
+  console.log(params.tokenId);
+
+  // const response = await fetch(nftDetailsRes.data?.nft?.uri);
+  // const data = await response.json();
+
   return (
     <div className="flex gap-x-8 h-full w-full">
       <div className="flex flex-col">
         <div className="w-full rounded-xl">
           <div className="flex h-full w-full items-center justify-center">
-            <img src="/nft.png" className="min-h-[600px]" />
+            {/* <img src={data.image} className="min-h-[600px]" /> */}
           </div>
         </div>
       </div>
@@ -36,9 +55,12 @@ export default function NftDetails({ params }: Params) {
       <div className="flex flex-col py-5 w-full space-y-8">
         <div>
           <div className="text-2xl">
-            Bored Ape Yacht Club #{params.tokenId.split("-")[1]}
+            {nftDetailsRes.data?.nft?.collectionName} #
+            {params.tokenId.split("-")[1]}
           </div>
-          <div>Owned by 0x86b4...5f98</div>
+          <div>
+            Owned by {truncateEthAddress(nftDetailsRes.data?.nft?.owner)}
+          </div>
         </div>
 
         <div className="flex flex-col w-full border border-neutral-500 rounded-lg bg-neutral-900">
@@ -52,7 +74,7 @@ export default function NftDetails({ params }: Params) {
               src="https://cryptologos.cc/logos/apecoin-ape-ape-logo.svg?v=026"
               className="h-8"
             />
-            <span className="text-lg">10,000</span>
+            <span className="text-lg">{nftDetailsRes.data?.nft?.price}</span>
           </div>
 
           <div className="px-2 pb-3">
@@ -78,13 +100,23 @@ export default function NftDetails({ params }: Params) {
                   <TableHead>Date</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
-                <TableCell>Sale</TableCell>
-                <TableCell>10,000 APE</TableCell>
-                <TableCell>Me</TableCell>
-                <TableCell>You</TableCell>
-                <TableCell>Yes please 🫶🏼</TableCell>
-              </TableBody>
+              {nftDetailsRes.data?.nft?.activity.map(
+                (item: any, index: number) => (
+                  <TableBody key={index}>
+                    <TableCell>
+                      {item.type === "Sale Cross Chain"
+                        ? "Cross Chain Sale"
+                        : "Native Sale"}
+                    </TableCell>
+                    <TableCell>{Number(item.price) / 1e18} APE</TableCell>
+                    <TableCell>{truncateEthAddress(item.from)}</TableCell>
+                    <TableCell>{truncateEthAddress(item.to)}</TableCell>
+                    <TableCell>
+                      {new Date(item.timestamp * 1000).toLocaleDateString()}
+                    </TableCell>
+                  </TableBody>
+                )
+              )}
             </Table>
           </div>
         </div>
