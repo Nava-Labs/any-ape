@@ -1,3 +1,4 @@
+import { DocumentNode } from "graphql";
 import { graphql } from "../types";
 
 export const getNftsQuery = graphql(`
@@ -19,4 +20,24 @@ export const getNftsQuery = graphql(`
       price
     }
   }
-`);
+`); 
+
+export const getNftDetailsQuery = graphql(`
+  query GetNftDetailsQuery($id: ID!) {
+    nft(
+      id: $id
+    ) {
+      activity {
+        from
+        price
+        timestamp
+        to
+        type
+      }
+      collectionName
+      owner
+      price
+      uri
+    }
+  }
+`)
