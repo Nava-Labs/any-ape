@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Account } from "./Account";
 
 export function Header() {
   return (
@@ -15,7 +16,7 @@ export function Header() {
           <span className="text-base ml-4">Marketplace</span>
         </Link>
       </div>
-      <button>0xeD7B...6Afd</button>
+      <Account />
     </div>
   );
 }
