@@ -49,7 +49,7 @@ export default async function NftDetails({ params }: Params) {
       <div className="flex flex-col">
         <div className="w-full rounded-xl">
           <div className="flex h-full w-full items-center justify-center">
-            <img src={imageUrl} className="min-h-[600px]" />
+            <img src={imageUrl} className="min-h-[500px] min-w-[500px]" />
           </div>
         </div>
       </div>
