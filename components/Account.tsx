@@ -24,6 +24,7 @@ export function Account() {
           </div>
 
           <div className="flex flex-col space-y-2 border border-neutral-500 p-2 rounded-lg mt-2 bg-black">
+            <div className="text-sm border-b font-medium">Your Balance</div>
             <div className="flex items-center space-x-1">
               <img
                 className="h-6"
@@ -42,10 +43,13 @@ export function Account() {
             </div>
           </div>
 
-          <div className="flex space-x-1 border justify-center border-neutral-500 p-2 rounded-lg mt-2 bg-black w-full">
-            <img src="/nft.png" className="h-24" />
-            <img src="/nft.png" className="h-24" />
-            <img src="/nft.png" className="h-24" />
+          <div className="flex flex-col space-y-2 border justify-center border-neutral-500 p-2 rounded-lg mt-2 bg-black w-full">
+            <div className="text-sm border-b font-medium">Your NFT</div>
+            <div className="flex items-center space-x-1">
+              <img src="/nft.png" className="h-24" />
+              <img src="/nft.png" className="h-24" />
+              <img src="/nft.png" className="h-24" />
+            </div>
           </div>
 
           <div className="mt-2 flex space-x-1"></div>
