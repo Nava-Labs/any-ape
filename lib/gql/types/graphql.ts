@@ -28,7 +28,7 @@ export type Activity = {
   __typename?: 'Activity';
   from: Scalars['Bytes']['output'];
   id: Scalars['ID']['output'];
-  nft: Nft;
+  listedNFT: ListedNft;
   price?: Maybe<Scalars['BigInt']['output']>;
   timestamp: Scalars['BigInt']['output'];
   to: Scalars['Bytes']['output'];
@@ -57,27 +57,27 @@ export type Activity_Filter = {
   id_lte?: InputMaybe<Scalars['ID']['input']>;
   id_not?: InputMaybe<Scalars['ID']['input']>;
   id_not_in?: InputMaybe<Array<Scalars['ID']['input']>>;
-  nft?: InputMaybe<Scalars['String']['input']>;
-  nft_?: InputMaybe<Nft_Filter>;
-  nft_contains?: InputMaybe<Scalars['String']['input']>;
-  nft_contains_nocase?: InputMaybe<Scalars['String']['input']>;
-  nft_ends_with?: InputMaybe<Scalars['String']['input']>;
-  nft_ends_with_nocase?: InputMaybe<Scalars['String']['input']>;
-  nft_gt?: InputMaybe<Scalars['String']['input']>;
-  nft_gte?: InputMaybe<Scalars['String']['input']>;
-  nft_in?: InputMaybe<Array<Scalars['String']['input']>>;
-  nft_lt?: InputMaybe<Scalars['String']['input']>;
-  nft_lte?: InputMaybe<Scalars['String']['input']>;
-  nft_not?: InputMaybe<Scalars['String']['input']>;
-  nft_not_contains?: InputMaybe<Scalars['String']['input']>;
-  nft_not_contains_nocase?: InputMaybe<Scalars['String']['input']>;
-  nft_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  nft_not_ends_with_nocase?: InputMaybe<Scalars['String']['input']>;
-  nft_not_in?: InputMaybe<Array<Scalars['String']['input']>>;
-  nft_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  nft_not_starts_with_nocase?: InputMaybe<Scalars['String']['input']>;
-  nft_starts_with?: InputMaybe<Scalars['String']['input']>;
-  nft_starts_with_nocase?: InputMaybe<Scalars['String']['input']>;
+  listedNFT?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_?: InputMaybe<ListedNft_Filter>;
+  listedNFT_contains?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_contains_nocase?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_ends_with?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_ends_with_nocase?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_gt?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_gte?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_in?: InputMaybe<Array<Scalars['String']['input']>>;
+  listedNFT_lt?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_lte?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_not?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_not_contains?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_not_contains_nocase?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_not_ends_with_nocase?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_not_in?: InputMaybe<Array<Scalars['String']['input']>>;
+  listedNFT_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_not_starts_with_nocase?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_starts_with?: InputMaybe<Scalars['String']['input']>;
+  listedNFT_starts_with_nocase?: InputMaybe<Scalars['String']['input']>;
   or?: InputMaybe<Array<InputMaybe<Activity_Filter>>>;
   price?: InputMaybe<Scalars['BigInt']['input']>;
   price_gt?: InputMaybe<Scalars['BigInt']['input']>;
@@ -130,13 +130,13 @@ export type Activity_Filter = {
 export enum Activity_OrderBy {
   From = 'from',
   Id = 'id',
-  Nft = 'nft',
-  NftCollectionAddress = 'nft__collectionAddress',
-  NftCollectionName = 'nft__collectionName',
-  NftId = 'nft__id',
-  NftOwner = 'nft__owner',
-  NftPrice = 'nft__price',
-  NftUri = 'nft__uri',
+  ListedNft = 'listedNFT',
+  ListedNftCollectionAddress = 'listedNFT__collectionAddress',
+  ListedNftCollectionName = 'listedNFT__collectionName',
+  ListedNftId = 'listedNFT__id',
+  ListedNftOwner = 'listedNFT__owner',
+  ListedNftPrice = 'listedNFT__price',
+  ListedNftUri = 'listedNFT__uri',
   Price = 'price',
   Timestamp = 'timestamp',
   To = 'to',
@@ -153,8 +153,8 @@ export type Block_Height = {
   number_gte?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type Nft = {
-  __typename?: 'NFT';
+export type ListedNft = {
+  __typename?: 'ListedNFT';
   activity: Array<Maybe<Activity>>;
   collectionAddress: Scalars['Bytes']['output'];
   collectionName: Scalars['String']['output'];
@@ -165,7 +165,7 @@ export type Nft = {
 };
 
 
-export type NftActivityArgs = {
+export type ListedNftActivityArgs = {
   first?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Activity_OrderBy>;
   orderDirection?: InputMaybe<OrderDirection>;
@@ -173,11 +173,11 @@ export type NftActivityArgs = {
   where?: InputMaybe<Activity_Filter>;
 };
 
-export type Nft_Filter = {
+export type ListedNft_Filter = {
   /** Filter for the block changed event. */
   _change_block?: InputMaybe<BlockChangedFilter>;
   activity_?: InputMaybe<Activity_Filter>;
-  and?: InputMaybe<Array<InputMaybe<Nft_Filter>>>;
+  and?: InputMaybe<Array<InputMaybe<ListedNft_Filter>>>;
   collectionAddress?: InputMaybe<Scalars['Bytes']['input']>;
   collectionAddress_contains?: InputMaybe<Scalars['Bytes']['input']>;
   collectionAddress_gt?: InputMaybe<Scalars['Bytes']['input']>;
@@ -216,7 +216,7 @@ export type Nft_Filter = {
   id_lte?: InputMaybe<Scalars['ID']['input']>;
   id_not?: InputMaybe<Scalars['ID']['input']>;
   id_not_in?: InputMaybe<Array<Scalars['ID']['input']>>;
-  or?: InputMaybe<Array<InputMaybe<Nft_Filter>>>;
+  or?: InputMaybe<Array<InputMaybe<ListedNft_Filter>>>;
   owner?: InputMaybe<Scalars['Bytes']['input']>;
   owner_contains?: InputMaybe<Scalars['Bytes']['input']>;
   owner_gt?: InputMaybe<Scalars['Bytes']['input']>;
@@ -257,7 +257,7 @@ export type Nft_Filter = {
   uri_starts_with_nocase?: InputMaybe<Scalars['String']['input']>;
 };
 
-export enum Nft_OrderBy {
+export enum ListedNft_OrderBy {
   Activity = 'activity',
   CollectionAddress = 'collectionAddress',
   CollectionName = 'collectionName',
@@ -279,8 +279,8 @@ export type Query = {
   _meta?: Maybe<_Meta_>;
   activities: Array<Activity>;
   activity?: Maybe<Activity>;
-  nft?: Maybe<Nft>;
-  nfts: Array<Nft>;
+  listedNFT?: Maybe<ListedNft>;
+  listedNFTs: Array<ListedNft>;
 };
 
 
@@ -307,21 +307,21 @@ export type QueryActivityArgs = {
 };
 
 
-export type QueryNftArgs = {
+export type QueryListedNftArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID']['input'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
 
-export type QueryNftsArgs = {
+export type QueryListedNfTsArgs = {
   block?: InputMaybe<Block_Height>;
   first?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Nft_OrderBy>;
+  orderBy?: InputMaybe<ListedNft_OrderBy>;
   orderDirection?: InputMaybe<OrderDirection>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   subgraphError?: _SubgraphErrorPolicy_;
-  where?: InputMaybe<Nft_Filter>;
+  where?: InputMaybe<ListedNft_Filter>;
 };
 
 export type Subscription = {
@@ -330,8 +330,8 @@ export type Subscription = {
   _meta?: Maybe<_Meta_>;
   activities: Array<Activity>;
   activity?: Maybe<Activity>;
-  nft?: Maybe<Nft>;
-  nfts: Array<Nft>;
+  listedNFT?: Maybe<ListedNft>;
+  listedNFTs: Array<ListedNft>;
 };
 
 
@@ -358,21 +358,21 @@ export type SubscriptionActivityArgs = {
 };
 
 
-export type SubscriptionNftArgs = {
+export type SubscriptionListedNftArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID']['input'];
   subgraphError?: _SubgraphErrorPolicy_;
 };
 
 
-export type SubscriptionNftsArgs = {
+export type SubscriptionListedNfTsArgs = {
   block?: InputMaybe<Block_Height>;
   first?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Nft_OrderBy>;
+  orderBy?: InputMaybe<ListedNft_OrderBy>;
   orderDirection?: InputMaybe<OrderDirection>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   subgraphError?: _SubgraphErrorPolicy_;
-  where?: InputMaybe<Nft_Filter>;
+  where?: InputMaybe<ListedNft_Filter>;
 };
 
 export type _Block_ = {
@@ -412,15 +412,15 @@ export enum _SubgraphErrorPolicy_ {
 export type GetNftsQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetNftsQueryQuery = { __typename?: 'Query', nfts: Array<{ __typename?: 'NFT', id: string, collectionAddress: any, owner: any, uri: string, collectionName: string, price?: any | null }>, activities: Array<{ __typename?: 'Activity', id: string, type: string, from: any, to: any, timestamp: any, price?: any | null }> };
+export type GetNftsQueryQuery = { __typename?: 'Query', listedNFTs: Array<{ __typename?: 'ListedNFT', id: string, collectionAddress: any, owner: any, uri: string, collectionName: string, price?: any | null }> };
 
 export type GetNftDetailsQueryQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type GetNftDetailsQueryQuery = { __typename?: 'Query', nft?: { __typename?: 'NFT', collectionName: string, owner: any, price?: any | null, uri: string, activity: Array<{ __typename?: 'Activity', from: any, price?: any | null, timestamp: any, to: any, type: string } | null> } | null };
+export type GetNftDetailsQueryQuery = { __typename?: 'Query', listedNFT?: { __typename?: 'ListedNFT', collectionName: string, owner: any, price?: any | null, uri: string, activity: Array<{ __typename?: 'Activity', from: any, price?: any | null, timestamp: any, to: any, type: string } | null> } | null };
 
 
-export const GetNftsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetNftsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nfts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"collectionAddress"}},{"kind":"Field","name":{"kind":"Name","value":"owner"}},{"kind":"Field","name":{"kind":"Name","value":"uri"}},{"kind":"Field","name":{"kind":"Name","value":"collectionName"}},{"kind":"Field","name":{"kind":"Name","value":"price"}}]}},{"kind":"Field","name":{"kind":"Name","value":"activities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"to"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}},{"kind":"Field","name":{"kind":"Name","value":"price"}}]}}]}}]} as unknown as DocumentNode<GetNftsQueryQuery, GetNftsQueryQueryVariables>;
-export const GetNftDetailsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetNftDetailsQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nft"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"activity"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}},{"kind":"Field","name":{"kind":"Name","value":"to"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"Field","name":{"kind":"Name","value":"collectionName"}},{"kind":"Field","name":{"kind":"Name","value":"owner"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"uri"}}]}}]}}]} as unknown as DocumentNode<GetNftDetailsQueryQuery, GetNftDetailsQueryQueryVariables>;
+export const GetNftsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetNftsQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listedNFTs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"collectionAddress"}},{"kind":"Field","name":{"kind":"Name","value":"owner"}},{"kind":"Field","name":{"kind":"Name","value":"uri"}},{"kind":"Field","name":{"kind":"Name","value":"collectionName"}},{"kind":"Field","name":{"kind":"Name","value":"price"}}]}}]}}]} as unknown as DocumentNode<GetNftsQueryQuery, GetNftsQueryQueryVariables>;
+export const GetNftDetailsQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetNftDetailsQuery"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listedNFT"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"activity"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"from"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"timestamp"}},{"kind":"Field","name":{"kind":"Name","value":"to"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}},{"kind":"Field","name":{"kind":"Name","value":"collectionName"}},{"kind":"Field","name":{"kind":"Name","value":"owner"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"uri"}}]}}]}}]} as unknown as DocumentNode<GetNftDetailsQueryQuery, GetNftDetailsQueryQueryVariables>;

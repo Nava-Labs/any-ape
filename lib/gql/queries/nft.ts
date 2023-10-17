@@ -3,7 +3,7 @@ import { graphql } from "../types";
 
 export const getNftsQuery = graphql(`
   query GetNftsQuery {
-    nfts {
+    listedNFTs {
       id
       collectionAddress
       owner
@@ -11,20 +11,12 @@ export const getNftsQuery = graphql(`
       collectionName
       price
     }
-    activities {
-      id
-      type
-      from
-      to
-      timestamp
-      price
-    }
   }
 `); 
 
 export const getNftDetailsQuery = graphql(`
   query GetNftDetailsQuery($id: ID!) {
-    nft(
+    listedNFT(
       id: $id
     ) {
       activity {
