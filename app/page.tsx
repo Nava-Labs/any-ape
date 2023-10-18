@@ -1,7 +1,6 @@
 "use client";
 
 import ConnectWallet from "@/components/ConnectWallet";
-import { Transaction } from "@/components/Transaction";
 import { useWalletAuth } from "@/lib/modules/wallet/hooks/useWalletAuth";
 import Link from "next/link";
 import { useState } from "react";
@@ -13,7 +12,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen items-center justify-center p-24">
-      <div>
+      <div className="border rounded-lg border-neutral-500">
         <ConnectWallet
           isConnected={isConnected}
           isConnecting={isConnecting}
@@ -21,13 +20,6 @@ export default function Home() {
           connectionError={connectionError}
           wallet={wallet!}
         />
-
-        {isConnected && (
-          <Transaction
-            transactionSuccess={transactionSuccess}
-            setTransactionSuccess={setTransactionSuccess}
-          />
-        )}
       </div>
     </main>
   );

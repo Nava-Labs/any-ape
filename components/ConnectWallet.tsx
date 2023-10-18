@@ -15,18 +15,14 @@ function ConnectWallet({
   isConnecting,
   isConnected,
   connect,
-  wallet,
 }: ConnectWalletProps): JSX.Element {
   const getTextButton = () => {
     if (isConnected) {
       return (
         <>
           <CheckIcon width={20} height={20} />
-          <a
-          // href={`https://mumbai.polygonscan.com/address/${wallet.getAddress()}`}
-          // target="_blank"
-          >
-            {"Wallet connected"}
+          <a href={`../marketplace`}>
+            {"You are registered, take me to marketplace"}
           </a>
         </>
       );
@@ -47,7 +43,7 @@ function ConnectWallet({
       {!connectionError ? (
         <button
           disabled={isConnecting || isConnected || !!connectionError}
-          className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-gray-900 hover:bg-gray-100 disabled:bg-white"
+          className="flex items-center justify-center gap-x-2.5 p-3 font-semibold text-white hover:bg-neutral-900 disabled:bg-neutral-500"
           onClick={connect}
         >
           {getTextButton()}
