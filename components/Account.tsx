@@ -96,7 +96,9 @@ export function Account() {
             </div>
             <button
               className="rounded-lg p-1 flex justify-end w-full"
-              onClick={() => navigator.clipboard.writeText("hahaha")} //TODO: Change the hahaha to user's address
+              onClick={() =>
+                navigator.clipboard.writeText(localStorageAddress as string)
+              }
             >
               <div className="border border-neutral-500 rounded-lg bg-black p-1">
                 <DocumentDuplicateIcon className="h-6" />
