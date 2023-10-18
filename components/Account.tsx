@@ -1,13 +1,11 @@
 "use client";
 
-import { UserIcon } from "@heroicons/react/24/outline";
+import { DocumentDuplicateIcon, UserIcon } from "@heroicons/react/24/outline";
 import * as Popover from "@radix-ui/react-popover";
 import Moralis from "moralis";
 import { EvmChain } from "moralis/common-evm-utils";
 import { useEffect, useState } from "react";
 import AccountImage from "./AccountImage";
-import { formatEther } from "ethers/lib/utils";
-// import AccountImage from "./AccountImage";
 
 export function Account() {
   // const localStorageAddress = window.localStorage.getItem("walletAddress");
@@ -82,17 +80,27 @@ export function Account() {
         </button>
       </Popover.Trigger>
       <Popover.Content>
-        <div className="bg-neutral-900 rounded-lg p-5 min-w-80">
+        <div className="bg-neutral-900 rounded-lg p-5 w-80">
           <div className="flex items-center space-x-1">
-            <UserIcon className="h-9" />
-            <div className="flex flex-col ">
-              <span className="text-sm">Account</span>
-              <span className="text-sm">
-                {/* {localStorageAddress!.slice(0, 5)}...
+            <div className="flex items-center">
+              <UserIcon className="h-9" />
+              <div className="flex flex-col ">
+                <span className="text-sm">Account</span>
+                <span className="text-sm">
+                  {/* {localStorageAddress!.slice(0, 5)}...
                 {localStorageAddress?.slice(-4)} */}
-                {/* TO DO: USER'S ADDRESS */}
-              </span>
+                  {/* TO DO: USER'S ADDRESS */}
+                </span>
+              </div>
             </div>
+            <button
+              className="rounded-lg p-1 flex justify-end w-full"
+              onClick={() => navigator.clipboard.writeText("hahaha")} //TODO: Change the hahaha to user's address
+            >
+              <div className="border border-neutral-500 rounded-lg bg-black p-1">
+                <DocumentDuplicateIcon className="h-6" />
+              </div>
+            </button>
           </div>
 
           <div className="flex flex-col space-y-2 border border-neutral-500 p-2 rounded-lg mt-2 bg-black">
@@ -119,7 +127,7 @@ export function Account() {
             <div className="text-sm border-b font-medium">Your NFT</div>
             <div className="flex items-center space-x-1">
               {usersNfts === null
-                ? console.log("SHIT")
+                ? "You don't have any NFT"
                 : usersNfts
                     .slice(0, 3)
                     .map((item: any, index: number) => (
