@@ -5,7 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/Table";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import {
   ArrowsUpDownIcon,
@@ -42,14 +42,17 @@ export default async function NftDetails({ params }: Params) {
     "https://ipfs.io/ipfs/" + nftDetails.uri.split("//")[1]
   );
   const data = await response.json();
-  let imageUrl = "https://ipfs.io/ipfs/" + data.image.split("//")[1];
+  let imageUrl = data.image;
 
   return (
     <div className="flex gap-x-8 h-full w-full">
       <div className="flex flex-col">
         <div className="w-full rounded-xl">
           <div className="flex h-full w-full items-center justify-center">
-            <img src={imageUrl} className="min-h-[500px] min-w-[500px]" />
+            <img
+              src={imageUrl}
+              className="min-h-[500px] max-h-[500px] min-w-[500px] max-w-[500px]"
+            />
           </div>
         </div>
       </div>
