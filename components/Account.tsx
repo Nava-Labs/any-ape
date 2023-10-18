@@ -75,7 +75,7 @@ export function Account() {
     <Popover.Root>
       <Popover.Trigger>
         <button className="flex bg-neutral-800 p-2 rounded-xl items-center">
-          {/* {localStorageAddress!.slice(0, 5)}...{localStorageAddress?.slice(-4)} */}
+          {localStorageAddress!.slice(0, 5)}...{localStorageAddress?.slice(-4)}
           {/* TO DO: USER'S ADDRESS */}
         </button>
       </Popover.Trigger>
@@ -87,8 +87,8 @@ export function Account() {
               <div className="flex flex-col ">
                 <span className="text-sm">Account</span>
                 <span className="text-sm">
-                  {/* {localStorageAddress!.slice(0, 5)}...
-                {localStorageAddress?.slice(-4)} */}
+                  {localStorageAddress!.slice(0, 5)}...
+                  {localStorageAddress?.slice(-4)}
                   {/* TO DO: USER'S ADDRESS */}
                 </span>
               </div>
