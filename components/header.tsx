@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import { ComethWallet, SupportedNetworks } from "@cometh/connect-sdk";
 import {
@@ -58,7 +59,15 @@ export function Header() {
           <span className="text-base ml-4">Marketplace</span>
         </Link>
       </div>
-      <Account />
+      <div className="flex space-x-3 ">
+        <button
+          className="bg-neutral-900 rounded-lg px-3 py-2 min-w-80"
+          onClick={() => multiChainFaucet()}
+        >
+          Faucet
+        </button>
+        <Account />
+      </div>
     </div>
   );
 }
