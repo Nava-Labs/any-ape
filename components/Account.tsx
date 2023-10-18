@@ -2,16 +2,19 @@
 
 import { UserIcon } from "@heroicons/react/24/outline";
 import * as Popover from "@radix-ui/react-popover";
+import truncateEthAddress from "truncate-eth-address";
 
 export function Account() {
-  const localStorageAddress = window.localStorage.getItem("walletAddress");
+  const localStorageAddress =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem("walletAddress")
+      : "";
 
   return (
     <Popover.Root>
       <Popover.Trigger>
         <button className="flex bg-neutral-800 p-2 rounded-xl items-center">
-          {localStorageAddress!.slice(0, 5)}...{localStorageAddress?.slice(-4)}
-          {/* TO DO: USER'S ADDRESS */}
+          {localStorageAddress ? truncateEthAddress(localStorageAddress) : ""}
         </button>
       </Popover.Trigger>
       <Popover.Content>
@@ -21,9 +24,9 @@ export function Account() {
             <div className="flex flex-col ">
               <span className="text-sm">Account</span>
               <span className="text-sm">
-                {localStorageAddress!.slice(0, 5)}...
-                {localStorageAddress?.slice(-4)}
-                {/* TO DO: USER'S ADDRESS */}
+                {localStorageAddress
+                  ? truncateEthAddress(localStorageAddress)
+                  : ""}
               </span>
             </div>
           </div>
