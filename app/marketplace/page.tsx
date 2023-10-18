@@ -12,7 +12,7 @@ export default async function Home() {
   const nftsRes = await client.query(getNftsQuery, {}).toPromise();
   if (!nftsRes) throw new Error("Failed to fetch NFTs");
 
-  let nfts = nftsRes.data?.listedNFTs;
+  let nfts = nftsRes.data?.listedNFTs.filter((item) => item.price !== "0");
 
   return (
     <>
