@@ -29,6 +29,9 @@ type Params = {
 };
 
 export default async function NftDetails({ params }: Params) {
+  const tokenAddress = params.tokenId.split("-")[0];
+  const tokenId = params.tokenId.split("-")[1];
+
   const nftDetailsRes = await client
     .query(getNftDetailsQuery, {
       id: params.tokenId,
@@ -37,12 +40,12 @@ export default async function NftDetails({ params }: Params) {
   if (!nftDetailsRes) throw new Error("Failed to fetch NFT details");
 
   const nftDetails = nftDetailsRes.data?.listedNFT!;
+  const baseUriWithId = nftDetails.uri.split("//")[1];
 
-  const response = await fetch(
-    "https://ipfs.io/ipfs/" + nftDetails.uri.split("//")[1]
-  );
+  const response = await fetch("https://ipfs.io/ipfs/" + baseUriWithId);
   const data = await response.json();
-  let imageUrl = "https://ipfs.io/ipfs/" + data.image.split("//")[1];
+  const imageUrlWithId = data.image.split("//")[1];
+  let imageUrl = "https://ipfs.io/ipfs/" + imageUrlWithId;
 
   return (
     <div className="flex gap-x-8 h-full w-full">
@@ -80,7 +83,7 @@ export default async function NftDetails({ params }: Params) {
 
           <div className="px-2 pb-3">
             <div className="flex items-center rounded-xl bg-blue-500 py-2">
-              <BuyButton />
+              <BuyButton tokenAddress={tokenAddress} tokenId={tokenId} />
             </div>
           </div>
         </div>

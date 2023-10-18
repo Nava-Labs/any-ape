@@ -29,10 +29,6 @@ export function useWalletAuth() {
   const [connectionError, setConnectionError] = useState<string | null>(null);
 
   const apiKey = process.env.NEXT_PUBLIC_COMETH_API_KEY_MUMBAI!;
-  const COUNTER_CONTRACT_ADDRESS =
-    // "0x3633A1bE570fBD902D10aC6ADd65BB11FC914624"; // mumbai
-    // "0x0f743cDc229303b52F716bc6C2670dAC2976C256"; //Fuji
-    "0x66fD376C36f63F1BFe22D224AcAB25B5425485CB"; // mumbai
 
   function displayError(message: string) {
     setConnectionError(message);
@@ -66,10 +62,7 @@ export function useWalletAuth() {
 
         const publicKeyId = JSON.parse(publicKeyIdBefore!).publicKeyId;
 
-        const publicKeyData = await usePublicKey(
-          process.env.NEXT_PUBLIC_COMETH_API_KEY_MUMBAI!,
-          publicKeyId
-        );
+        const publicKeyData = await usePublicKey(apiKey, publicKeyId);
 
         const requestData: WebAuthnRequest = {
           walletAddress: walletAddress,
@@ -79,22 +72,10 @@ export function useWalletAuth() {
           deviceData: publicKeyData.deviceData,
         };
 
-        await useWebAuthn(
-          process.env.NEXT_PUBLIC_COMETH_API_KEY_FUJI!,
-          requestData
-        );
-        console.log("b");
+        await useWebAuthn(apiKey, requestData);
       }
 
       const instanceProvider = new ComethProvider(instance);
-
-      const contract = new ethers.Contract(
-        COUNTER_CONTRACT_ADDRESS,
-        countContractAbi,
-        instanceProvider.getSigner()
-      );
-
-      setCounterContract(contract);
 
       setIsConnected(true);
       setWallet(instance as any);

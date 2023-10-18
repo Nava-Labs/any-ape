@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import { BigNumber } from "ethers";
 import { Interface } from "ethers/lib/utils";
 import { twMerge } from "tailwind-merge";
 
@@ -24,7 +25,7 @@ const ICounter = new Interface(["function count()"]);
 
 export function encodeInputDataApproveERC20(
   spender: string,
-  value: number
+  value: BigNumber
 ): string {
   return IApproveERC20.encodeFunctionData("approve", [spender, value]);
 }
@@ -34,20 +35,20 @@ export function encodeInputDataClaimFaucet(): string {
 }
 
 export function encodeInputDataNativeChainSale(
-  address: string,
-  tokenId: number
+  tokenAddress: string,
+  tokenId: string
 ): string {
   return IAnyApeNativeChainSale.encodeFunctionData("directBuy", [
-    address,
+    tokenAddress,
     tokenId,
   ]);
 }
 export function encodeInputDataCrossChainSale(
-  address: string,
-  tokenId: number
+  tokenAddress: string,
+  tokenId: string
 ): string {
   return IAnyApeCrossChainSale.encodeFunctionData("crossChainSale", [
-    address,
+    tokenAddress,
     tokenId,
   ]);
 }
@@ -55,3 +56,7 @@ export function encodeInputDataCrossChainSale(
 export function encodeCounter(): string {
   return ICounter.encodeFunctionData("count", []);
 }
+
+export const INFINITE: BigNumber = BigNumber.from(
+  "115792089237316195423570985008687907853269984665640564039457584007913129639935"
+);
