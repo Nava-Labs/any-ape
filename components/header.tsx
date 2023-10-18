@@ -8,6 +8,7 @@ import {
   useSendTx,
 } from "@/lib/modules/wallet/hooks/useSendTx";
 import { encodeInputDataClaimFaucet } from "@/lib/utils";
+import { Account } from "./Account";
 
 export function Header() {
   const localStorageAddress = window.localStorage.getItem("walletAddress");
@@ -57,10 +58,7 @@ export function Header() {
           <span className="text-base ml-4">Marketplace</span>
         </Link>
       </div>
-      <button>
-        {localStorageAddress!.slice(0, 5)}...{localStorageAddress?.slice(-4)}
-      </button>
-      <button onClick={() => multiChainFaucet()}>Faucet</button>
+      <Account />
     </div>
   );
 }
