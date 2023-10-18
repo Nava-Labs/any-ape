@@ -3,20 +3,85 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import {
+  SendTxArgs,
+  TxMetadata,
+  useSendTx,
+} from "@/lib/modules/wallet/hooks/useSendTx";
+import { SupportedNetworks } from "@cometh/connect-sdk";
+import {
+  INFINITE,
+  encodeCounter,
+  encodeInputDataApproveERC20,
+  encodeInputDataCrossChainSale,
+  encodeInputDataNativeChainSale,
+} from "@/lib/utils";
 
-export function BuyButton() {
+type Props = {
+  tokenAddress: string;
+  tokenId: string;
+};
+
+export function BuyButton({ tokenAddress, tokenId }: Props) {
   const [selectedChain, setSelectedChain] = useState("Polygon");
   const [selectedChainId, setSelectedChainId] = useState(80001);
+  // const [txHash, setTxHash] = useState("");
 
   const handleChainSelect = (chain: string, chainId: number) => {
     setSelectedChain(chain);
     setSelectedChainId(chainId);
   };
 
+  const address = window.localStorage.getItem("walletAddress");
+  const anyApeFujiAddress = process.env.NEXT_PUBLIC_ANY_APE_FUJI!;
+  const anyApeMumbaiAddress = process.env.NEXT_PUBLIC_ANY_APE_MUMBAI!;
+
+  let network: SupportedNetworks;
+  let whichApiKey: string;
+  let txMetadatas: Array<TxMetadata> = [];
+
+  // mumbai
+  if (selectedChainId == 80001) {
+    const mumbaiTxMetadata: TxMetadata = {
+      to: anyApeMumbaiAddress,
+      value: "0",
+      data: encodeInputDataNativeChainSale(tokenAddress, tokenId),
+    };
+
+    network = SupportedNetworks.MUMBAI;
+    whichApiKey = process.env.NEXT_PUBLIC_COMETH_API_KEY_MUMBAI!;
+    txMetadatas.push(mumbaiTxMetadata);
+  } else if (selectedChainId == 43113) {
+    // fuji
+
+    const fujiTxMetadata: TxMetadata = {
+      to: anyApeFujiAddress,
+      value: "0",
+      data: encodeInputDataCrossChainSale(tokenAddress, tokenId),
+    };
+
+    network = SupportedNetworks.FUJI;
+    whichApiKey = process.env.NEXT_PUBLIC_COMETH_API_KEY_FUJI!;
+    txMetadatas.push(fujiTxMetadata);
+  }
+
+  const transaction: SendTxArgs = {
+    walletAddress: address!,
+    apiKey: whichApiKey!,
+    chainId: network!,
+    txMetadata: txMetadatas,
+  };
+
   return (
     <>
       <div className="w-full text-center ">
-        <button className="text-center flex-1 w-full">
+        <button
+          onClick={async () => {
+            const a = await useSendTx(transaction);
+            console.log("txHash", a);
+          }}
+          className="text-center flex-1 w-full"
+        >
           <span>Buy</span>
         </button>
       </div>
