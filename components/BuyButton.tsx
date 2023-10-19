@@ -1,5 +1,7 @@
 "use client";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
@@ -25,7 +27,8 @@ type Props = {
 export function BuyButton({ tokenAddress, tokenId }: Props) {
   const [selectedChain, setSelectedChain] = useState("Polygon");
   const [selectedChainId, setSelectedChainId] = useState(80001);
-  // const [txHash, setTxHash] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [txHash, setTxHash] = useState("");
 
   const handleChainSelect = (chain: string, chainId: number) => {
     setSelectedChain(chain);
@@ -76,14 +79,33 @@ export function BuyButton({ tokenAddress, tokenId }: Props) {
     <>
       <div className="w-full text-center ">
         <button
+          disabled={isLoading}
           onClick={async () => {
-            const result = await handleSendTx(transaction);
-            console.log(result);
+            setIsLoading(true);
+            try {
+              const result = await handleSendTx(transaction);
+              console.log(result);
+              setTxHash(result);
+              toast.success(`Transaction Successful. TxHash: ${result}`, {
+                position: toast.POSITION.TOP_RIGHT,
+                closeOnClick: false,
+                hideProgressBar: true,
+              });
+            } catch (error) {
+              console.error(error);
+              toast.error("Transaction Failed", {
+                position: toast.POSITION.TOP_RIGHT,
+                hideProgressBar: true,
+              });
+            } finally {
+              setIsLoading(false);
+            }
           }}
           className="text-center flex-1 w-full"
         >
-          <span>Buy</span>
+          {isLoading ? "Loading..." : "Buy"}
         </button>
+        <ToastContainer />
       </div>
 
       <DropdownMenu.Root>
