@@ -3,7 +3,7 @@ import { getNftsQuery } from "@/lib/gql/queries/nft";
 import { Client, cacheExchange, fetchExchange } from "@urql/core";
 import Image from "./modules/Image";
 
-export const client = new Client({
+const client = new Client({
   url: "https://api.thegraph.com/subgraphs/name/jonassunandar/any-ape-subgraph",
   exchanges: [cacheExchange, fetchExchange],
 });

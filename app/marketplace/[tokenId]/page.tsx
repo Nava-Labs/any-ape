@@ -17,7 +17,7 @@ import { Client, cacheExchange, fetchExchange } from "@urql/core";
 import { getNftDetailsQuery } from "@/lib/gql/queries/nft";
 import truncateEthAddress from "truncate-eth-address";
 
-export const client = new Client({
+const client = new Client({
   url: "https://api.thegraph.com/subgraphs/name/jonassunandar/any-ape-subgraph",
   exchanges: [cacheExchange, fetchExchange],
 });
