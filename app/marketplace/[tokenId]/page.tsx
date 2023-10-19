@@ -5,7 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/components/ui/Table";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import {
   ArrowsUpDownIcon,
