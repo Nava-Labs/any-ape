@@ -116,7 +116,6 @@ export default async function NftDetails({ params }: Params) {
                       : "Native Sale"}
                   </TableCell>
                   <TableCell>
-                    {Number(item.price) / 1e18}{" "}
                     {Number(BigInt(item.price) / BigInt(1e18))} APE
                   </TableCell>
                   <TableCell>{truncateEthAddress(item.from)}</TableCell>
