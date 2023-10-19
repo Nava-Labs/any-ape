@@ -21,6 +21,7 @@ import truncateEthAddress from "truncate-eth-address";
 
 const client = new Client({
   url: "https://api.thegraph.com/subgraphs/name/jonassunandar/any-ape-subgraph",
+  requestPolicy: "network-only",
   exchanges: [cacheExchange, fetchExchange],
 });
 

@@ -4,6 +4,7 @@ import { Client, Provider, cacheExchange, fetchExchange } from "urql";
 
 export const client = new Client({
   url: "https://api.thegraph.com/subgraphs/name/jonassunandar/any-ape-subgraph",
+  requestPolicy: "network-only",
   exchanges: [cacheExchange, fetchExchange],
 });
 
