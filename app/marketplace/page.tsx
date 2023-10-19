@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import { getNftsQuery } from "@/lib/gql/queries/nft";
 import { Client, cacheExchange, fetchExchange } from "@urql/core";

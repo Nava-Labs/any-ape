@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = "force-dynamic";
 
 import { DocumentDuplicateIcon, UserIcon } from "@heroicons/react/24/outline";
 import * as Popover from "@radix-ui/react-popover";
