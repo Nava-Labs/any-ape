@@ -26,7 +26,8 @@ export function useWalletAuth() {
 
   const [connectionError, setConnectionError] = useState<string | null>(null);
 
-  const apiKey = process.env.NEXT_PUBLIC_COMETH_API_KEY_MUMBAI!;
+  const apiKeyMumbai = process.env.NEXT_PUBLIC_COMETH_API_KEY_MUMBAI!;
+  const apiKeyFuji = process.env.NEXT_PUBLIC_COMETH_API_KEY_FUJI!;
 
   function displayError(message: string) {
     setConnectionError(message);
@@ -37,12 +38,12 @@ export function useWalletAuth() {
     try {
       const walletAdaptor = new ConnectAdaptor({
         chainId: SupportedNetworks.MUMBAI,
-        apiKey,
+        apiKey: apiKeyMumbai,
       });
 
       const instance = new ComethWallet({
         authAdapter: walletAdaptor,
-        apiKey,
+        apiKey: apiKeyMumbai,
       });
 
       const localStorageAddress = window.localStorage.getItem("walletAddress");
@@ -60,7 +61,7 @@ export function useWalletAuth() {
 
         const publicKeyId = JSON.parse(publicKeyIdBefore!).publicKeyId;
 
-        const publicKeyData = await getPublicKey(apiKey, publicKeyId);
+        const publicKeyData = await getPublicKey(apiKeyMumbai, publicKeyId);
 
         const requestData: WebAuthnRequest = {
           walletAddress: walletAddress,
@@ -70,7 +71,7 @@ export function useWalletAuth() {
           deviceData: publicKeyData.deviceData,
         };
 
-        await getWebAuthn(apiKey, requestData);
+        await getWebAuthn(apiKeyFuji, requestData);
       }
 
       const instanceProvider = new ComethProvider(instance);
