@@ -138,7 +138,7 @@ export function BuyButton({ tokenAddress, tokenId }: Props) {
           >
             <img
               className="h-7"
-              src="/Avalanche_logo.png"
+              src="/avalanche_logo.png"
               alt="Avalanche Logo"
             />
             <span>Pay from Avalanche</span>

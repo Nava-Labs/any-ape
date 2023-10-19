@@ -140,8 +140,8 @@ export function Account() {
               <div className="flex items-center space-x-1">
                 <img
                   className="h-6"
-                  src="/Avalanche_logo.png"
-                  alt="Polygon Logo"
+                  src="/avalanche_logo.png"
+                  alt="Avalanche Logo"
                 />
                 <span>{apeOnFuji} APE</span>
               </div>
