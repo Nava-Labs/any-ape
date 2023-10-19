@@ -5,7 +5,7 @@ import {
   encodeInputDataApproveERC20,
   encodeInputDataClaimFaucet,
 } from "@/lib/utils";
-import { SendTxArgs, TxMetadata, useSendTx } from "./useSendTx";
+import { SendTxArgs, TxMetadata, handleSendTx } from "./handleSendTx";
 import { SupportedNetworks } from "@cometh/connect-sdk";
 
 const bridgedApeMumbai = process.env.NEXT_PUBLIC_BRIDGED_APE_MUMBAI!;
@@ -63,7 +63,7 @@ const fujiFaucetTx: SendTxArgs = {
   txMetadata: [fujiFaucet, approveFujiMetadata],
 };
 
-export const useApproveAndClaim = () => {
-  useSendTx(mumbaiFaucetTx);
-  useSendTx(fujiFaucetTx);
+export const approveAndClaim = () => {
+  handleSendTx(mumbaiFaucetTx);
+  handleSendTx(fujiFaucetTx);
 };

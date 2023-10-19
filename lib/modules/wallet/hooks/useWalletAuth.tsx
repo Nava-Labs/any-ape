@@ -8,12 +8,10 @@ import {
 } from "@cometh/connect-sdk";
 import { useEffect, useState } from "react";
 import { useWalletContext } from "./useWalletContext";
-import { ethers } from "ethers";
-import countContractAbi from "../../contract/counterABI.json";
-import usePublicKey from "@/lib/modules/wallet/getters/usePublicKey";
-import useWebAuthn, {
+import getPublicKey from "@/lib/modules/wallet/getters/getPublicKey";
+import getWebAuthn, {
   WebAuthnRequest,
-} from "@/lib/modules/wallet/getters/useWebAuthn";
+} from "@/lib/modules/wallet/getters/getWebAuthn";
 
 export function useWalletAuth() {
   const {
@@ -62,7 +60,7 @@ export function useWalletAuth() {
 
         const publicKeyId = JSON.parse(publicKeyIdBefore!).publicKeyId;
 
-        const publicKeyData = await usePublicKey(apiKey, publicKeyId);
+        const publicKeyData = await getPublicKey(apiKey, publicKeyId);
 
         const requestData: WebAuthnRequest = {
           walletAddress: walletAddress,
@@ -72,7 +70,7 @@ export function useWalletAuth() {
           deviceData: publicKeyData.deviceData,
         };
 
-        await useWebAuthn(apiKey, requestData);
+        await getWebAuthn(apiKey, requestData);
       }
 
       const instanceProvider = new ComethProvider(instance);

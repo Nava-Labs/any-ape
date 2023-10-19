@@ -21,7 +21,7 @@ export type SendTxArgs = {
 
 const anyApeFujiAddress = process.env.NEXT_PUBLIC_ANY_APE_FUJI!;
 
-export const useSendTx = async ({
+export const handleSendTx = async ({
   walletAddress,
   apiKey,
   chainId,

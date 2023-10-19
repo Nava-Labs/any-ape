@@ -12,7 +12,7 @@ export interface WebAuthnRequest {
   };
 }
 
-export default async function useWebAuthn(
+export default async function webAuthn(
   apikey: string,
   requestData: WebAuthnRequest
 ) {

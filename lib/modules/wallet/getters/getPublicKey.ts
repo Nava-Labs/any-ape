@@ -7,7 +7,7 @@ export interface Response {
   deviceData: object;
 }
 
-export default async function usePublicKey(
+export default async function getPublicKey(
   apikey: string,
   publicKeyId: string
 ): Promise<any> {

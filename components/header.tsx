@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Account } from "./Account";
-import { useApproveAndClaim } from "@/lib/modules/wallet/hooks/useApproveAndClaim";
+import { approveAndClaim } from "@/lib/modules/wallet/hooks/approveAndClaim";
 
 export function Header() {
   return (
@@ -23,7 +23,7 @@ export function Header() {
       <div className="flex space-x-3 ">
         <button
           className="bg-neutral-900 rounded-lg px-3 py-2 min-w-80"
-          onClick={() => useApproveAndClaim()}
+          onClick={() => approveAndClaim()}
         >
           Faucet
         </button>

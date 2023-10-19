@@ -6,8 +6,8 @@ import { useState } from "react";
 import {
   SendTxArgs,
   TxMetadata,
-  useSendTx,
-} from "@/lib/modules/wallet/hooks/useSendTx";
+  handleSendTx,
+} from "@/lib/modules/wallet/hooks/handleSendTx";
 import { SupportedNetworks } from "@cometh/connect-sdk";
 import {
   INFINITE,
@@ -77,8 +77,8 @@ export function BuyButton({ tokenAddress, tokenId }: Props) {
       <div className="w-full text-center ">
         <button
           onClick={async () => {
-            const a = await useSendTx(transaction);
-            console.log("txHash", a);
+            const result = await handleSendTx(transaction);
+            console.log(result);
           }}
           className="text-center flex-1 w-full"
         >
