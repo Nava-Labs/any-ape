@@ -12,7 +12,9 @@ const Image: React.FC<ImageProps> = ({ uri }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(uri);
+        const response = await fetch(
+          "https://ipfs.io/ipfs/" + uri.split("ipfs/")[1]
+        );
         const data = await response.json();
         setImageUrl(data.image);
       } catch (error) {
