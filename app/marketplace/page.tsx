@@ -30,7 +30,9 @@ export default async function Home() {
                     src="https://cryptologos.cc/logos/apecoin-ape-ape-logo.svg?v=026"
                     className="h-8"
                   />
-                  <span className="text-lg">{Number(item.price) / 1e18}</span>
+                  <span className="text-lg">
+                    {Number(BigInt(item.price) / BigInt(1e18))}
+                  </span>
                 </div>
                 <button className="py-1 px-5 rounded-lg border border-neutral-600 hover:bg-neutral-600">
                   Buy
