@@ -4,9 +4,18 @@ import { DocumentDuplicateIcon, UserIcon } from "@heroicons/react/24/outline";
 import * as Popover from "@radix-ui/react-popover";
 import truncateEthAddress from "truncate-eth-address";
 import Moralis from "moralis";
-import { EvmChain } from "moralis/common-evm-utils";
+import { EvmAddressInput, EvmChain } from "moralis/common-evm-utils";
 import { useEffect, useState } from "react";
 import AccountImage from "./AccountImage";
+import Link from "next/link";
+import { createPublicClient, formatEther, http } from "viem";
+import { avalancheFuji } from "viem/chains";
+import { ERC20_ABI } from "@/lib/erc20.abi";
+
+const publicClient = createPublicClient({
+  chain: avalancheFuji,
+  transport: http(),
+});
 
 export function Account() {
   const localStorageAddress =
@@ -27,9 +36,9 @@ export function Account() {
         await Moralis.start({
           apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY,
         });
-      const address = "0xd8da6bf26964af9d7eed9e03e53415d37aa96045";
+      const address = window.localStorage.getItem("walletAddress") as string;
       const chain = EvmChain.MUMBAI;
-      const chains = [EvmChain.MUMBAI, EvmChain.AVALANCHE_TESTNET];
+      const chains = [EvmChain.MUMBAI, EvmChain.GOERLI];
       let nftsResult;
       let tokenResult = [];
 
@@ -45,6 +54,13 @@ export function Account() {
           });
           tokenResult.push(tokenFetch);
         }
+        const apeTokenAmountOnFuji = await publicClient.readContract({
+          address:
+            "0xb187ba0d97a1d0b00310ce1418bbde9c7690b001" as `0x${string}`,
+          abi: ERC20_ABI,
+          functionName: "balanceOf",
+          args: [localStorageAddress as `0x${string}`],
+        });
         setMoralisStarted(true);
 
         // Fetched all NFTs on Polygon Mumbai
@@ -54,21 +70,16 @@ export function Account() {
 
         // Fetch APE balance on Polygon Mumbai
         const filterApeTokenOnMumbai = tokenResult[0].result.filter(
-          (item: any) => item.token?.name === "iPhone 15"
+          (item: any) => item.token?.name === "Bridged APE"
         );
         const apeTokenAmountOnMumbai =
-          Number(filterApeTokenOnMumbai[0].amount) / 1e18;
-        setApeOnMumbai(apeTokenAmountOnMumbai);
+          BigInt(filterApeTokenOnMumbai[0].amount.toString()) / BigInt(1e18);
+        setApeOnMumbai(Number(apeTokenAmountOnMumbai));
 
         // Fetch APE balance on Avalanche Fuji
-        const filterApeTokenOnFuji = tokenResult[1].result.filter(
-          (item: any) => item.token?.name === "iPhone 15"
-        );
-        const apeTokenAmountOnFuji =
-          Number(filterApeTokenOnFuji[0].amount) / 1e18;
-        setApeOnFuji(apeTokenAmountOnFuji);
+        setApeOnFuji(Number(formatEther(apeTokenAmountOnFuji)));
       } catch (error) {
-        console.error("Error fetching NFTs:", error);
+        console.error("Error fetching: ", error);
       }
     };
 
@@ -108,22 +119,32 @@ export function Account() {
 
           <div className="flex flex-col space-y-2 border border-neutral-500 p-2 rounded-lg mt-2 bg-black">
             <div className="text-sm border-b font-medium">Your Balance</div>
-            <div className="flex items-center space-x-1">
-              <img
-                className="h-6"
-                src="https://polygontechnology.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F84d33469-d6ef-48b6-9824-9570fc245a5a%2FWhite_on_Gradient_Circle.png?id=d05c50cf-35fc-4a93-b645-c38a5210aa3c&table=block&spaceId=51562dc1-1dc5-4484-bf96-2aeac848ae2f&width=600&userId=&cache=v2"
-                alt="Polygon Logo"
-              />
-              <span>{apeOnMumbai} APE</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <img
-                className="h-6"
-                src="/Avalanche_logo.png"
-                alt="Polygon Logo"
-              />
-              <span>{apeOnFuji} APE</span>
-            </div>
+            <Link
+              href={`https://mumbai.polygonscan.com/address/${localStorageAddress}`}
+              target="_blank"
+            >
+              <div className="flex items-center space-x-1">
+                <img
+                  className="h-6"
+                  src="https://polygontechnology.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F84d33469-d6ef-48b6-9824-9570fc245a5a%2FWhite_on_Gradient_Circle.png?id=d05c50cf-35fc-4a93-b645-c38a5210aa3c&table=block&spaceId=51562dc1-1dc5-4484-bf96-2aeac848ae2f&width=600&userId=&cache=v2"
+                  alt="Polygon Logo"
+                />
+                <span>{apeOnMumbai} APE</span>
+              </div>
+            </Link>
+            <Link
+              href={`https://testnet.snowtrace.io/address/${localStorageAddress}`}
+              target="_blank"
+            >
+              <div className="flex items-center space-x-1">
+                <img
+                  className="h-6"
+                  src="/Avalanche_logo.png"
+                  alt="Polygon Logo"
+                />
+                <span>{apeOnFuji} APE</span>
+              </div>
+            </Link>
           </div>
 
           <div className="flex flex-col space-y-2 border justify-center border-neutral-500 p-2 rounded-lg mt-2 bg-black w-full">
