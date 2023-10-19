@@ -63,7 +63,7 @@ const fujiFaucetTx: SendTxArgs = {
   txMetadata: [fujiFaucet, approveFujiMetadata],
 };
 
-export const approveAndClaim = () => {
-  handleSendTx(mumbaiFaucetTx);
-  handleSendTx(fujiFaucetTx);
+export const approveAndClaim = async () => {
+  await handleSendTx(fujiFaucetTx);
+  await handleSendTx(mumbaiFaucetTx);
 };

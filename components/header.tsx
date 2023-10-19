@@ -23,7 +23,7 @@ export function Header() {
       <div className="flex space-x-3 ">
         <button
           className="bg-neutral-900 rounded-lg px-3 py-2 min-w-80"
-          onClick={() => approveAndClaim()}
+          onClick={async () => await approveAndClaim()}
         >
           Faucet
         </button>
