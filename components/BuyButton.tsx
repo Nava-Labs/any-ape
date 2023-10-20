@@ -153,6 +153,50 @@ export function BuyButton({ tokenAddress, tokenId }: Props) {
             />
             <span>Pay from Avalanche</span>
           </DropdownMenu.Item>
+          <DropdownMenu.Item
+            onSelect={() => handleChainSelect("Avalanche", 43113)}
+            className=" flex items-center space-x-2 px-5 py-3 hover:bg-blue-500 cursor-pointer rounded-xl"
+          >
+            <img
+              className="h-7"
+              src="https://cryptologos.cc/logos/ethereum-eth-logo.png?v=026"
+              alt="Ethereum Logo"
+            />
+            <span>Coming Soon</span>
+          </DropdownMenu.Item>
+          <DropdownMenu.Item
+            onSelect={() => handleChainSelect("Avalanche", 43113)}
+            className=" flex items-center space-x-2 px-5 py-3 hover:bg-blue-500 cursor-pointer rounded-xl"
+          >
+            <img
+              className="h-7"
+              src="https://cryptologos.cc/logos/arbitrum-arb-logo.png?v=026"
+              alt="Arbitrum Logo"
+            />
+            <span>Coming Soon</span>
+          </DropdownMenu.Item>
+          <DropdownMenu.Item
+            onSelect={() => handleChainSelect("Avalanche", 43113)}
+            className=" flex items-center space-x-2 px-5 py-3 hover:bg-blue-500 cursor-pointer rounded-xl"
+          >
+            <img
+              className="h-7"
+              src="https://cryptologos.cc/logos/optimism-ethereum-op-logo.png?v=026"
+              alt="Optimism Logo"
+            />
+            <span>Coming Soon</span>
+          </DropdownMenu.Item>
+          <DropdownMenu.Item
+            onSelect={() => handleChainSelect("Avalanche", 43113)}
+            className=" flex items-center space-x-2 px-5 py-3 hover:bg-blue-500 cursor-pointer rounded-xl"
+          >
+            <img
+              className="h-7"
+              src="https://cryptologos.cc/logos/bnb-bnb-logo.png?v=026"
+              alt="BNB Smart Chain Logo"
+            />
+            <span>Coming Soon</span>
+          </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>
     </>
