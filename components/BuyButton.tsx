@@ -125,7 +125,7 @@ export function BuyButton({ tokenAddress, tokenId }: Props) {
             src={
               selectedChain === "Polygon"
                 ? "https://polygontechnology.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F89203c58-0bc9-48b4-898c-18a637150354%2FGradient_on_Transparent.png?table=block&id=d51ab665-6522-4ba6-8480-feb2e18f1a27&spaceId=51562dc1-1dc5-4484-bf96-2aeac848ae2f&width=600&userId=&cache=v2"
-                : "/Avalanche_logo.png"
+                : "/avalanche_logo.png"
             }
           />
           <ChevronDownIcon className="h-5" />
