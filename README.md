@@ -19,14 +19,15 @@ Here's how we achieve all of the features we offer:
 ## How to Run?
 To get AnyApe up and running, follow these simple steps:
 
-### 1. First, run the development server:
+### 1. Install the necessary dependency:
 
 ```bash
-npm run dev
+npm install
 ```
-or
+
+### 2. Run the development server:
 ```bash
-yarn dev
+npm run dev
 ```
 
 ### 2. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
