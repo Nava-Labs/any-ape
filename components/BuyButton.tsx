@@ -86,11 +86,21 @@ export function BuyButton({ tokenAddress, tokenId }: Props) {
               const result = await handleSendTx(transaction);
               console.log(result);
               setTxHash(result);
-              toast.success(`Transaction Successful. TxHash: ${result}`, {
-                position: toast.POSITION.TOP_RIGHT,
-                closeOnClick: false,
-                hideProgressBar: true,
-              });
+              toast.success(
+                <div>
+                  Transaction Successful. TxHash:{" "}
+                  <a href={result} target="_blank" rel="noopener noreferrer">
+                    {result}
+                  </a>
+                </div>,
+                {
+                  position: toast.POSITION.TOP_RIGHT,
+                  closeOnClick: false,
+                  hideProgressBar: true,
+                  pauseOnHover: true,
+                  draggable: false,
+                }
+              );
             } catch (error) {
               console.error(error);
               toast.error("Transaction Failed", {
