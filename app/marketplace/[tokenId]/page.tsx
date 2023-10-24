@@ -111,11 +111,7 @@ export default async function NftDetails({ params }: Params) {
               </TableHeader>
               {nftDetails.activity.map((item: any, index: number) => (
                 <TableBody key={index}>
-                  <TableCell>
-                    {item.type === "Sale Cross Chain"
-                      ? "Cross Chain Sale"
-                      : "Native Sale"}
-                  </TableCell>
+                  <TableCell>{item.type}</TableCell>
                   <TableCell>
                     {Number(BigInt(item.price) / BigInt(1e18))} APE
                   </TableCell>
